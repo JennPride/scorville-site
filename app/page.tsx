@@ -36,7 +36,7 @@ export default function Home() {
     <main>
       <nav className="nav" aria-label="Main navigation">
         <a className="brand" href="#top" aria-label="Scorville home">
-          <img className="brand-mark" src="/scorville-flame.png" alt="" />
+          <span className="brand-mark" aria-hidden="true">S</span>
           <span>SCORVILLE</span>
         </a>
         <a className="nav-cta" href="#waitlist">Join the waitlist <span aria-hidden="true">↘</span></a>
@@ -54,11 +54,11 @@ export default function Home() {
           <div className="glow glow-one" />
           <div className="glow glow-two" />
           <div className="phone-preview">
-            <div className="phone-top"><img src="/scorville-flame.png" alt="" /><span>SCORVILLE</span><b>•••</b></div>
+            <div className="phone-top"><span className="mini-mark">S</span><span>SCORVILLE</span><b>•••</b></div>
             <div className="phone-kicker">TRENDING THIS WEEK</div>
             <h2>Find your fire.</h2>
             <div className="sauce-preview">
-              <img src="/scorville-bottle.png" alt="Illustrated hot sauce bottle" />
+              <div className="sauce-monogram" aria-hidden="true">CB</div>
               <div><span className="sauce-brand">HEAT SEEKER CO.</span><strong>Cherry Bomb</strong><p>Smoky • Tangy • Hot</p><div className="pepper-rating">● ● ● ● ○</div></div>
             </div>
             <div className="phone-stats"><span><b>4.8</b>RATING</span><span><b>1.2k</b>CHECK-INS</span><span><b>Hot</b>HEAT</span></div>
@@ -108,7 +108,7 @@ export default function Home() {
         </form>
       </section>
 
-      <footer><a className="brand footer-brand" href="#top"><img className="brand-mark" src="/scorville-flame.png" alt="" /><span>SCORVILLE</span></a><p>Made for people who put hot sauce on everything.</p><p>© 2026 Scorville</p></footer>
+      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark" aria-hidden="true">S</span><span>SCORVILLE</span></a><p>Made for people who put hot sauce on everything.</p><p>© 2026 Scorville</p></footer>
     </main>
   );
 }
