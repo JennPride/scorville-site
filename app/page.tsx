@@ -36,7 +36,7 @@ export default function Home() {
     <main>
       <nav className="nav" aria-label="Main navigation">
         <a className="brand" href="#top" aria-label="Scorville home">
-          <span className="brand-mark" aria-hidden="true">S</span>
+          <img className="brand-mark" src="/scorville-flame.png" alt="" />
           <span>SCORVILLE</span>
         </a>
         <a className="nav-cta" href="#waitlist">Join the waitlist <span aria-hidden="true">↘</span></a>
@@ -50,19 +50,21 @@ export default function Home() {
           <a className="primary-button" href="#waitlist">Get early access <span aria-hidden="true">→</span></a>
         </div>
 
-        <div className="hero-art" aria-label="Scorville heat scale illustration">
-          <div className="sunburst" />
-          <div className="pepper-card pepper-one">
-            <span className="pepper-stem" />
-            <span className="pepper-body" />
+        <div className="hero-art" aria-label="Scorville app preview">
+          <div className="glow glow-one" />
+          <div className="glow glow-two" />
+          <div className="phone-preview">
+            <div className="phone-top"><img src="/scorville-flame.png" alt="" /><span>SCORVILLE</span><b>•••</b></div>
+            <div className="phone-kicker">TRENDING THIS WEEK</div>
+            <h2>Find your fire.</h2>
+            <div className="sauce-preview">
+              <img src="/scorville-bottle.png" alt="Illustrated hot sauce bottle" />
+              <div><span className="sauce-brand">HEAT SEEKER CO.</span><strong>Cherry Bomb</strong><p>Smoky • Tangy • Hot</p><div className="pepper-rating">● ● ● ● ○</div></div>
+            </div>
+            <div className="phone-stats"><span><b>4.8</b>RATING</span><span><b>1.2k</b>CHECK-INS</span><span><b>Hot</b>HEAT</span></div>
           </div>
-          <div className="pepper-card pepper-two">
-            <span className="pepper-stem" />
-            <span className="pepper-body" />
-          </div>
-          <div className="heat-sticker">TURN UP<br />THE HEAT<span>★★★★★</span></div>
-          <div className="rating-chip"><strong>4.8</strong><span>COMMUNITY<br />RATING</span></div>
-          <p className="art-caption">YOUR TASTE.<br />YOUR HEAT.<br />YOUR SCORVILLE.</p>
+          <div className="floating-card taste-card"><span>TASTE PROFILE</span><strong>Smoky + bright</strong><div><i /><i /><i /><i /></div></div>
+          <div className="floating-card checkin-card"><span>NEW CHECK-IN</span><strong>🔥 +24 today</strong></div>
         </div>
       </section>
 
@@ -106,7 +108,7 @@ export default function Home() {
         </form>
       </section>
 
-      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark">S</span><span>SCORVILLE</span></a><p>Made for people who put hot sauce on everything.</p><p>© 2026 Scorville</p></footer>
+      <footer><a className="brand footer-brand" href="#top"><img className="brand-mark" src="/scorville-flame.png" alt="" /><span>SCORVILLE</span></a><p>Made for people who put hot sauce on everything.</p><p>© 2026 Scorville</p></footer>
     </main>
   );
 }
