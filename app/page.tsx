@@ -5,8 +5,8 @@ import { FormEvent, useState } from "react";
 type Audience = "beta" | "brand" | "both";
 
 const audienceLabels: Record<Audience, string> = {
-  beta: "Beta tester",
-  brand: "Hot sauce brand",
+  beta: "Beta Tester",
+  brand: "Sauce Brand",
   both: "Both",
 };
 
@@ -39,6 +39,11 @@ export default function Home() {
           <span className="brand-mark" aria-hidden="true">S</span>
           <span>SCORVILLE</span>
         </a>
+        <div className="nav-links" aria-label="Jump to section">
+          <a href="#top">Overview</a>
+          <a href="#features">Features</a>
+          <a href="#about">About</a>
+        </div>
         <a className="nav-cta" href="#waitlist">Join the waitlist <span aria-hidden="true">↘</span></a>
       </nav>
 
@@ -46,8 +51,8 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow"><span /> The community for heat seekers</p>
           <h1>Find your<br />next <em>favorite</em><br />hot sauce.</h1>
-          <p className="hero-text">Track what you taste. Rate the burn. Discover sauces you’ll love—and the makers bringing the heat.</p>
-          <a className="primary-button" href="#waitlist">Get early access <span aria-hidden="true">→</span></a>
+          <p className="hero-text">Track what you taste. Rate the burn. Discover sauces you’ll love—and compete against other pepper heads.</p>
+          <a className="primary-button" href="#waitlist">Get Early Access <span aria-hidden="true">→</span></a>
         </div>
 
         <div className="hero-art" aria-label="Scorville app preview">
@@ -58,7 +63,10 @@ export default function Home() {
             <div className="phone-kicker">TRENDING THIS WEEK</div>
             <h2>Find your fire.</h2>
             <div className="sauce-preview">
-              <div className="sauce-monogram" aria-hidden="true">CB</div>
+              <div className="image-placeholder sauce-image-placeholder" role="img" aria-label="Placeholder for a hot sauce image">
+                <span>IMAGE</span>
+                <small>Replace me</small>
+              </div>
               <div><span className="sauce-brand">HEAT SEEKER CO.</span><strong>Cherry Bomb</strong><p>Smoky • Tangy • Hot</p><div className="pepper-rating">● ● ● ● ○</div></div>
             </div>
             <div className="phone-stats"><span><b>4.8</b>RATING</span><span><b>1.2k</b>CHECK-INS</span><span><b>Hot</b>HEAT</span></div>
@@ -72,15 +80,29 @@ export default function Home() {
         <div>DISCOVER <span>✦</span> RATE <span>✦</span> TRACK <span>✦</span> SHARE <span>✦</span> DISCOVER <span>✦</span> RATE</div>
       </section>
 
-      <section className="features">
+      <section className="features" id="features">
         <div className="section-heading">
           <p className="eyebrow"><span /> One place for every sauce</p>
           <h2>Know your heat.<br />Share your taste.</h2>
         </div>
         <div className="feature-grid">
-          <article><span className="feature-number">01</span><div className="feature-icon">◎</div><h3>Discover</h3><p>Explore sauces by flavor, pepper, heat level, or the people you trust.</p></article>
-          <article><span className="feature-number">02</span><div className="feature-icon">↗</div><h3>Check in</h3><p>Rate every sauce you try and build a personal history of your heat journey.</p></article>
-          <article><span className="feature-number">03</span><div className="feature-icon">✦</div><h3>Connect</h3><p>Follow fellow heat seekers and discover the independent brands behind the bottle.</p></article>
+          <article><span className="feature-number">01</span><div className="feature-media-placeholder" aria-hidden="true"><span>YOUR IMAGE</span></div><h3>Discover</h3><p>Explore sauces by flavor, pepper, heat level, or the people you trust.</p></article>
+          <article><span className="feature-number">02</span><div className="feature-media-placeholder" aria-hidden="true"><span>YOUR IMAGE</span></div><h3>Check in</h3><p>Rate every sauce you try and build a personal history of your heat journey.</p></article>
+          <article><span className="feature-number">03</span><div className="feature-media-placeholder" aria-hidden="true"><span>YOUR IMAGE</span></div><h3>Connect</h3><p>Follow fellow heat seekers and discover the independent brands behind the bottle.</p></article>
+        </div>
+      </section>
+
+      <section className="about" id="about">
+        <div className="creator-image-placeholder" role="img" aria-label="Placeholder for a photograph of the creator">
+          <span>CREATOR PHOTO</span>
+          <small>Replace me</small>
+        </div>
+        <div className="about-copy">
+          <p className="eyebrow"><span /> About the creator</p>
+          <h2>Built by a fellow<br />heat seeker.</h2>
+          <p>Scorville is an independent project created from a simple idea: discovering and remembering great hot sauce should be easier, more social, and a lot more fun.</p>
+          <p>I’m building a place where curious tasters and passionate makers can meet—one bottle, one check-in, and one very spicy recommendation at a time.</p>
+          <div className="creator-tags"><span>Independent creator</span><span>Product builder</span><span>Hot sauce fan</span></div>
         </div>
       </section>
 
