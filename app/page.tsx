@@ -36,7 +36,6 @@ export default function Home() {
     <main>
       <nav className="nav" aria-label="Main navigation">
         <a className="brand" href="#top" aria-label="Scorville home">
-          <span className="brand-mark" aria-hidden="true">S</span>
           <span>SCORVILLE</span>
         </a>
         <div className="nav-links" aria-label="Jump to section">
@@ -55,36 +54,63 @@ export default function Home() {
           <a className="primary-button" href="#waitlist">Get Early Access <span aria-hidden="true">→</span></a>
         </div>
 
-        <div className="hero-art" aria-label="Scorville app preview">
+        <div className="hero-art" aria-label="Scorville app check-in preview">
           <div className="glow glow-one" />
           <div className="glow glow-two" />
-          <div className="phone-preview">
-            <div className="phone-top"><span className="mini-mark">S</span><span>SCORVILLE</span><b>•••</b></div>
-            <div className="phone-kicker">TRENDING THIS WEEK</div>
-            <h2>Find your fire.</h2>
-            <div className="sauce-preview">
-              <div className="image-placeholder sauce-image-placeholder" role="img" aria-label="Placeholder for a hot sauce image">
-                <span>IMAGE</span>
-                <small>Replace me</small>
+          <div className="phone-preview" aria-hidden="true">
+            <div className="phone-status"><span>4:20</span><span>● 5G</span></div>
+            <div className="phone-heading">
+              <div>
+                <span className="phone-brand">SCORVILLE</span>
+                <h2>Get Saucey</h2>
+                <p>Signed in as heatseeker</p>
               </div>
-              <div><span className="sauce-brand">HEAT SEEKER CO.</span><strong>Cherry Bomb</strong><p>Smoky • Tangy • Hot</p><div className="pepper-rating">● ● ● ● ○</div></div>
             </div>
-            <div className="phone-stats"><span><b>4.8</b>RATING</span><span><b>1.2k</b>CHECK-INS</span><span><b>Hot</b>HEAT</span></div>
+
+            <div className="checkin-preview">
+              <div className="checkin-summary">
+                <div className="image-placeholder checkin-photo">
+                  <span>PHOTO</span>
+                  <small>Replace me</small>
+                </div>
+                <div className="checkin-copy">
+                  <span className="checkin-user">@sgian</span>
+                  <span className="checkin-brand">TRADER JOE&apos;S</span>
+                  <strong>Bird&apos;s eye</strong>
+                  <p>overall 8/10 · heat 3/10 · flavor 7/10</p>
+                  <span className="checkin-date">7/31/2026</span>
+                </div>
+                <span className="close-chip">Close</span>
+              </div>
+
+              <div className="score-grid">
+                <div className="score-tile"><span>OVERALL</span><strong>8/10</strong></div>
+                <div className="score-tile"><span>HEAT</span><strong>3/10</strong></div>
+                <div className="score-tile"><span>FLAVOR</span><strong>7/10</strong></div>
+                <div className="score-tile"><span>UNIQUENESS</span><strong>6/10</strong></div>
+                <div className="score-tile"><span>VERSATILITY</span><strong>7/10</strong></div>
+                <div className="score-tile"><span>BUY AGAIN</span><strong>Yes</strong></div>
+              </div>
+
+              <div className="pairings">
+                <strong>Pairings</strong>
+                <div><span>fish tacos</span><span>seafood</span><span>burritos</span></div>
+              </div>
+
+              <div className="phone-actions">
+                <span>View Brand</span>
+                <span>View Sauce</span>
+              </div>
+            </div>
           </div>
-          <div className="floating-card taste-card"><span>TASTE PROFILE</span><strong>Smoky + bright</strong><div><i /><i /><i /><i /></div></div>
-          <div className="floating-card checkin-card"><span>NEW CHECK-IN</span><strong>🔥 +24 today</strong></div>
         </div>
       </section>
 
       <section className="marquee" aria-label="Scorville features">
-        <div>DISCOVER <span>✦</span> RATE <span>✦</span> TRACK <span>✦</span> SHARE <span>✦</span> DISCOVER <span>✦</span> RATE</div>
+        <div>DISCOVER <span>✦</span> RATE <span>✦</span> TRACK <span>✦</span> SHARE <span>✦</span><span> COMPETE </span></div>
       </section>
 
       <section className="features" id="features">
-        <div className="section-heading">
-          <p className="eyebrow"><span /> One place for every sauce</p>
-          <h2>Know your heat.<br />Share your taste.</h2>
-        </div>
         <div className="feature-grid">
           <article><span className="feature-number">01</span><div className="feature-media-placeholder" aria-hidden="true"><span>YOUR IMAGE</span></div><h3>Discover</h3><p>Explore sauces by flavor, pepper, heat level, or the people you trust.</p></article>
           <article><span className="feature-number">02</span><div className="feature-media-placeholder" aria-hidden="true"><span>YOUR IMAGE</span></div><h3>Check in</h3><p>Rate every sauce you try and build a personal history of your heat journey.</p></article>
@@ -99,10 +125,11 @@ export default function Home() {
         </div>
         <div className="about-copy">
           <p className="eyebrow"><span /> About the creator</p>
-          <h2>Built by a fellow<br />heat seeker.</h2>
-          <p>Scorville is an independent project created from a simple idea: discovering and remembering great hot sauce should be easier, more social, and a lot more fun.</p>
-          <p>I’m building a place where curious tasters and passionate makers can meet—one bottle, one check-in, and one very spicy recommendation at a time.</p>
-          <div className="creator-tags"><span>Independent creator</span><span>Product builder</span><span>Hot sauce fan</span></div>
+          <h2>Built by a fellow<br />hot sauce fanatic</h2>
+          <p>Hello, I'm Jenn! I fell in love with everything spicy from an early age thanks to my Mom and her crazy tolerance.
+            I absolutely adore trying new sauces and testing my limits, and I thought it would be fun to build a place for other heat seekers to do the same.
+            If you have any questions, feedback, or just want to say hi, feel free to reach out via email to <a href="mailto:jenn@scorville.com">jenn@scorville.com</a>!
+          </p>
         </div>
       </section>
 
@@ -130,7 +157,7 @@ export default function Home() {
         </form>
       </section>
 
-      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark" aria-hidden="true">S</span><span>SCORVILLE</span></a><p>Made for people who put hot sauce on everything.</p><p>© 2026 Scorville</p></footer>
-    </main>
+      <footer><a className="brand footer-brand" href="#top"><span> SCORVILLE</span></a><p>Made for people who put hot sauce on everything.</p><p>© 2026 Scorville</p></footer>
+    </main >
   );
 }
