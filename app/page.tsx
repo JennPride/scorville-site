@@ -1,10 +1,23 @@
 "use client";
 
-import { FormEvent, useCallback, useState } from "react";
+import { useCallback, useState, type SVGProps } from "react";
+import { mdiFire } from "@mdi/js";
 
 type Audience = "beta" | "brand" | "both";
-import Icon from '@mdi/react';
-import { mdiFire } from '@mdi/js';
+
+function MdiIcon({ path, className, ...props }: SVGProps<SVGSVGElement> & { path: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d={path} />
+    </svg>
+  );
+}
 
 const audienceLabels: Record<Audience, string> = {
   beta: "Beta Tester",
@@ -145,12 +158,12 @@ export default function Home() {
                   <strong className="block text-lg">Bird&apos;s eye</strong>
                   <span className="block text-[9px] font-black tracking-[.12em] text-scorville-pink min-[521px]">TRADER JOE&apos;S</span>
                   <span className="block text-[9px] text-scorville-muted">Rating</span>
-                  <div className="flex">
-                    <Icon path={mdiFire} size={1} />
-                    <Icon path={mdiFire} size={1} />
-                    <Icon path={mdiFire} size={1} />
-                    <Icon path={mdiFire} size={1} />
-                    <Icon path={mdiFire} size={1} />
+                  <div className="flex text-scorville-orange">
+                    <MdiIcon path={mdiFire} className="h-4 w-4" />
+                    <MdiIcon path={mdiFire} className="h-4 w-4" />
+                    <MdiIcon path={mdiFire} className="h-4 w-4" />
+                    <MdiIcon path={mdiFire} className="h-4 w-4" />
+                    <MdiIcon path={mdiFire} className="h-4 w-4" />
                   </div>
                   <p className="overflow-hidden text-ellipsis whitespace-nowrap text-[9px] font-bold text-scorville-muted">overall 8/10 · heat 3/10 · flavor 7/10</p>
                   <span className="block text-[10px] text-scorville-muted">7/31/2026</span>
