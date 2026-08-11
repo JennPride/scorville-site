@@ -48,6 +48,13 @@
     --color-scorville-orange: #ff4d2f;
     --color-scorville-yellow: #ffd166;
     --color-scorville-success: #a7f3c4;
+    --animate-ticker: ticker 22s linear infinite;
+
+    @keyframes ticker {
+        to {
+            transform: translateX(-50%);
+        }
+    }
 }
 
 @layer base {

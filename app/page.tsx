@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, type SVGProps } from "react";
+import { useCallback, useState, type MouseEvent, type SVGProps } from "react";
 import { mdiFire } from "@mdi/js";
 
 type Audience = "beta" | "brand" | "both";
@@ -35,10 +35,16 @@ const scores = [
 ];
 
 const features = [
-  ["01", "Discover", "Explore sauces by flavor, pepper, heat level, or the people you trust."],
-  ["02", "Check in", "Rate every sauce you try and build a personal history of your heat journey."],
+  ["01", "Discover", "Explore sauces by flavor, pepper, brand, heat level, or folks with similar taste."],
+  ["02", "Check In", "Rate every sauce you try and build a personal history of your heat journey."],
   ["03", "Connect", "Follow fellow heat seekers and discover the independent brands behind the bottle."],
 ];
+
+const tickerItems = ["DISCOVER", "RATE", "TRACK", "SHARE", "COMPETE"];
+
+const tickerLoopItems = Array.from({ length: 4 }, (_, repeat) =>
+  tickerItems.map((label) => ({ label, key: `${repeat}-${label}` })),
+).flat();
 
 const focusRing = "focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-scorville-yellow";
 
@@ -48,7 +54,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = useCallback(async (event: any) => {
+  const handleSubmit = useCallback(async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setStatus("loading");
     setMessage("");
@@ -77,7 +83,7 @@ export default function Home() {
           href="#top"
           aria-label="Scorville home"
         >
-          SCORVILLE
+          <img src="/images/logo_flame.png" alt="Scorville" className="h-8 pb-1.5" /> SCORVILLE
         </a>
         <div
           className="order-3 flex w-full items-center justify-center gap-1 rounded-xl border border-scorville-border bg-scorville-surface p-1 min-[881px]:order-none min-[881px]:w-auto"
@@ -145,17 +151,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-t-[17px] border-2 border-scorville-pink bg-scorville-surface">
-              <div className="relative grid min-h-[119px] grid-cols-[62px_minmax(0,1fr)] gap-[11px] border-b border-scorville-border py-[13px] pr-14 pl-[13px] min-[521px]:min-h-[137px] min-[521px]:grid-cols-[72px_minmax(0,1fr)] min-[521px]:gap-3.5 min-[521px]:pt-[17px] min-[521px]:pr-17 min-[521px]:pb-4 min-[521px]:pl-[17px]">
-                <div className="flex h-[93px] flex-col items-center justify-center overflow-hidden rounded-[13px] border border-dashed border-[#7a3348] bg-[repeating-linear-gradient(135deg,#302128_0,#302128_10px,#25191f_10px,#25191f_20px)] text-[#ff8fa6] min-[521px]:h-[105px]">
-                  <span className="text-[10px] font-black tracking-[.1em]">PHOTO</span>
-                  <small className="mt-[3px] text-[8px] text-scorville-muted">Replace me</small>
-                </div>
+            <div className="overflow-hidden rounded-[17px] border-2 border-scorville-pink bg-scorville-surface">
+              <div className="relative grid min-h-[148px] grid-cols-[88px_minmax(0,1fr)] gap-3 border-b border-scorville-border py-[13px] pr-14 pl-[13px] min-[521px]:min-h-[171px] min-[521px]:grid-cols-[108px_minmax(0,1fr)] min-[521px]:gap-4 min-[521px]:pt-[17px] min-[521px]:pr-17 min-[521px]:pb-4 min-[521px]:pl-[17px]">
+                <img className="h-[120px] w-full rounded-[13px] border border-[#7a3348] object-cover min-[521px]:h-[138px]" src="/images/checkin.png" alt="The last dab by heatonist featuring an 'XXX' on the bottle" />
                 <div className="min-w-0">
                   <span className="block text-[9px] text-scorville-muted">@hurtssogood</span>
-                  <strong className="block text-lg">Bird&apos;s eye</strong>
+                  <strong className="block text-lg">The Last Dab XXX</strong>
                   <span className="block text-[9px] font-black tracking-[.12em] text-scorville-pink min-[521px]">TRADER JOE&apos;S</span>
-                  <span className="block text-[9px] text-scorville-muted">Overall: 8/10</span>
+                  <span className="block text-[9px] text-scorville-muted">Overall: 9/10</span>
                   <div className="flex text-scorville-orange">
                     <MdiIcon path={mdiFire} className="h-4 w-4" />
                     <MdiIcon path={mdiFire} className="h-4 w-4" />
@@ -196,17 +199,28 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="text-align-center border-y border-scorville-border bg-scorville-surface min-[881px]:scroll-mt-25" aria-label="Scorville features">
-        <div className="py-3.5 text-xs font-black tracking-[.14em] text-scorville-muted [word-spacing:24px]">
-          DISCOVER <span className="text-scorville-pink">✦</span> RATE <span className="text-scorville-pink">✦</span> TRACK <span className="text-scorville-pink">✦</span> SHARE <span className="text-scorville-pink">✦</span> COMPETE
+      <section
+        className="overflow-hidden border-y border-scorville-border bg-scorville-surface"
+        aria-label="Discover, rate, track, share, and compete"
+      >
+        <div className="flex w-max animate-ticker py-3.5 text-xs font-black tracking-[.14em] text-scorville-muted will-change-transform motion-reduce:animate-none" aria-hidden="true">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0 items-center gap-6 pr-6">
+              {tickerLoopItems.map((item) => (
+                <span key={item.key} className="flex items-center gap-6 whitespace-nowrap">
+                  <span className="text-scorville-pink">✦</span>
+                  {item.label}
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="scroll-mt-33 px-[clamp(24px,6vw,88px)] pt-22.5 pb-30 min-[881px]:scroll-mt-25 min-[881px]:pt-30" id="features">
+      <section className="scroll-mt-33 px-[clamp(24px,6vw,88px)] pb-30 min-[881px]:scroll-mt-25 min-[881px]:pt-30" id="features">
         <div className="grid grid-cols-1 gap-4 min-[881px]:grid-cols-3">
           {features.map(([number, title, copy]) => (
             <article key={number} className="min-h-62.5 rounded-2xl border border-scorville-border bg-scorville-surface p-6.5 transition-[transform,border-color] hover:-translate-y-1 hover:border-scorville-pink min-[881px]:min-h-90">
-              <span className="text-[10px] font-black text-scorville-muted">{number}</span>
               <div className="my-[18px] grid aspect-2/1 place-items-center rounded-xl border border-dashed border-[#7a3348] bg-[repeating-linear-gradient(135deg,#302128_0,#302128_12px,#25191f_12px,#25191f_24px)] text-[#ff8fa6]">
                 <span className="text-[9px] font-black tracking-[.12em]">YOUR IMAGE</span>
               </div>
@@ -298,7 +312,9 @@ export default function Home() {
       </section>
 
       <footer className="flex min-h-27 flex-col items-center justify-between gap-5 px-[clamp(24px,6vw,88px)] py-6 text-center text-[10px] font-bold tracking-[.08em] text-scorville-muted uppercase min-[521px]:flex-row min-[521px]:text-left">
-        <a className={`flex items-center whitespace-nowrap text-lg font-black tracking-[.11em] text-scorville-text ${focusRing}`} href="#top">SCORVILLE</a>
+        <a className={`flex items-center whitespace-nowrap text-lg font-black tracking-[.11em] text-scorville-text ${focusRing}`} href="#top">
+          <img src="/images/logo_flame.png" alt="Scorville" className="h-8 pb-1.5" /> SCORVILLE
+        </a>
         <p>Made for people who put hot sauce on everything.</p>
         <p>© 2026 Scorville</p>
       </footer>
