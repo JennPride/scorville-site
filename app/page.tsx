@@ -27,8 +27,8 @@ const audienceLabels: Record<Audience, string> = {
 
 const scores = [
   ["OVERALL", "8/10"],
-  ["HEAT", "3/10"],
-  ["FLAVOR", "7/10"],
+  ["HEAT", "9/10"],
+  ["FLAVOR", "10/10"],
   ["UNIQUENESS", "6/10"],
   ["VERSATILITY", "7/10"],
   ["BUY AGAIN", "Yes"],
@@ -166,17 +166,17 @@ export default function Home() {
                     <MdiIcon path={mdiFire} className="h-4 w-4" />
                     <MdiIcon path={mdiFire} className="h-4 w-4" />
                   </div>
-                  <p className="overflow-hidden text-ellipsis whitespace-nowrap text-[9px] font-bold text-scorville-muted">heat 3/10 · flavor 7/10</p>
+                  <p className="overflow-hidden text-ellipsis whitespace-nowrap text-[9px] font-bold text-scorville-muted">heat 9/10 · flavor 10/10</p>
                   <span className="block text-[10px] text-scorville-muted">7/31/2026</span>
                 </div>
                 <span className="absolute top-[13px] right-2 rounded-[10px] bg-[#421d2a] px-2 py-[7px] text-[10px] font-black text-[#ff9db1] min-[521px]:right-3 min-[521px]:px-[11px] min-[521px]:py-2">Close</span>
               </div>
 
-              <div className="grid grid-cols-2 gap-[7px] p-3 min-[521px]:gap-[9px] min-[521px]:p-4">
+              <div className="grid grid-cols-3 gap-[7px] p-3 min-[521px]:gap-[9px] min-[521px]:p-4">
                 {scores.map(([label, value]) => (
-                  <div key={label} className="min-h-13.5 rounded-xl bg-scorville-surface-muted px-[11px] py-[9px] min-[521px]:min-h-[61px] min-[521px]:px-[13px] min-[521px]:py-[11px]">
+                  <div key={label} className="rounded-xl bg-scorville-surface-muted p-[9px] text-center min-[521px]:p-[11px]">
                     <span className="block text-[8px] font-black text-scorville-muted">{label}</span>
-                    <strong className="mt-1 block text-base min-[521px]:text-lg">{value}</strong>
+                    <strong className="mt-1 block text-base min-[521px]:text-md">{value}</strong>
                   </div>
                 ))}
               </div>
