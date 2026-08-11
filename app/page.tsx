@@ -49,8 +49,6 @@ export default function Home() {
   const [message, setMessage] = useState("");
 
   const handleSubmit = useCallback(async (event: any) => {
-    console.log(event)
-    console.log(email)
     event.preventDefault();
     setStatus("loading");
     setMessage("");
@@ -66,7 +64,7 @@ export default function Home() {
     if (response.ok) {
       setEmail("");
     }
-  }, [])
+  }, [email, audience]);
 
   return (
     <main className="overflow-hidden bg-scorville-bg text-scorville-text">
