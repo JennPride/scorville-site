@@ -157,7 +157,7 @@ export default function Home() {
                   <span className="block text-[9px] text-scorville-muted">@hurtssogood</span>
                   <strong className="block text-lg">Bird&apos;s eye</strong>
                   <span className="block text-[9px] font-black tracking-[.12em] text-scorville-pink min-[521px]">TRADER JOE&apos;S</span>
-                  <span className="block text-[9px] text-scorville-muted">Rating</span>
+                  <span className="block text-[9px] text-scorville-muted">Overall: 8/10</span>
                   <div className="flex text-scorville-orange">
                     <MdiIcon path={mdiFire} className="h-4 w-4" />
                     <MdiIcon path={mdiFire} className="h-4 w-4" />
@@ -165,7 +165,7 @@ export default function Home() {
                     <MdiIcon path={mdiFire} className="h-4 w-4" />
                     <MdiIcon path={mdiFire} className="h-4 w-4" />
                   </div>
-                  <p className="overflow-hidden text-ellipsis whitespace-nowrap text-[9px] font-bold text-scorville-muted">overall 8/10 · heat 3/10 · flavor 7/10</p>
+                  <p className="overflow-hidden text-ellipsis whitespace-nowrap text-[9px] font-bold text-scorville-muted">heat 3/10 · flavor 7/10</p>
                   <span className="block text-[10px] text-scorville-muted">7/31/2026</span>
                 </div>
                 <span className="absolute top-[13px] right-2 rounded-[10px] bg-[#421d2a] px-2 py-[7px] text-[10px] font-black text-[#ff9db1] min-[521px]:right-3 min-[521px]:px-[11px] min-[521px]:py-2">Close</span>
@@ -198,9 +198,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="scroll-mt-33 overflow-hidden border-y border-scorville-border bg-scorville-surface min-[881px]:scroll-mt-25" aria-label="Scorville features">
-        <div className="px-0 py-3.5 text-xs font-black tracking-[.14em] whitespace-nowrap text-scorville-muted [word-spacing:24px]">
-          DISCOVER <span className="text-scorville-pink">✦</span> RATE <span className="text-scorville-pink">✦</span> TRACK <span className="text-scorville-pink">✦</span> SHARE <span className="text-scorville-pink">✦ COMPETE</span>
+      <section className="text-align-center border-y border-scorville-border bg-scorville-surface min-[881px]:scroll-mt-25" aria-label="Scorville features">
+        <div className="py-3.5 text-xs font-black tracking-[.14em] text-scorville-muted [word-spacing:24px]">
+          DISCOVER <span className="text-scorville-pink">✦</span> RATE <span className="text-scorville-pink">✦</span> TRACK <span className="text-scorville-pink">✦</span> SHARE <span className="text-scorville-pink">✦</span> COMPETE
         </div>
       </section>
 
@@ -224,12 +224,9 @@ export default function Home() {
         id="about"
       >
         <div
-          className="flex min-h-85 flex-col items-center justify-center rounded-[18px] border border-dashed border-[#7a3348] bg-[repeating-linear-gradient(135deg,#302128_0,#302128_16px,#25191f_16px,#25191f_32px)] text-[#ff8fa6] min-[521px]:min-h-105 min-[881px]:min-h-130"
-          role="img"
-          aria-label="Placeholder for a photograph of the creator"
+          className="flex min-h-85 flex-col items-center justify-center"
         >
-          <span className="text-[11px] font-black tracking-[.14em]">CREATOR PHOTO</span>
-          <small className="mt-1.5 text-[10px] text-scorville-muted">Replace me</small>
+          <img className="mt-2.5 h-[300px] w-[300px] rounded-full border border-scorville-pink object-cover" src="/images/me.jpg" alt="Photograph of the creator, Jenn" />
         </div>
         <div>
           <p className="mb-6 flex items-center gap-2.5 text-xs font-black tracking-[.11em] text-scorville-pink uppercase">
@@ -307,6 +304,6 @@ export default function Home() {
         <p>Made for people who put hot sauce on everything.</p>
         <p>© 2026 Scorville</p>
       </footer>
-    </main>
+    </main >
   );
 }
