@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useState, type MouseEvent, type SVGProps } from "react";
+import { useCallback, useState, type CSSProperties, type MouseEvent, type SVGProps } from "react";
 import { mdiFire } from "@mdi/js";
 
-type Audience = "beta" | "brand" | "both";
+type Audience = "beta" | "brand";
 
 function MdiIcon({ path, className, ...props }: SVGProps<SVGSVGElement> & { path: string }) {
   return (
@@ -20,24 +20,26 @@ function MdiIcon({ path, className, ...props }: SVGProps<SVGSVGElement> & { path
 }
 
 const audienceLabels: Record<Audience, string> = {
-  beta: "Beta Tester",
-  brand: "Sauce Brand",
-  both: "Both",
+  beta: "For Users",
+  brand: "For Brands",
 };
 
-const scores = [
-  ["OVERALL", "8/10"],
-  ["HEAT", "9/10"],
+const detailScores = [
   ["FLAVOR", "10/10"],
   ["UNIQUENESS", "6/10"],
   ["VERSATILITY", "7/10"],
-  ["BUY AGAIN", "Yes"],
 ];
 
 const features = [
   ["01", "Discover", "Explore sauces by flavor, pepper, brand, heat level, or folks with similar taste."],
   ["02", "Check In", "Rate every sauce you try and build a personal history of your heat journey."],
   ["03", "Connect", "Follow fellow heat seekers and discover the independent brands behind the bottle."],
+];
+
+const brandBenefits = [
+  ["01", "Own your presence", "Claim your brand profile, keep sauce details accurate, and give heat seekers a trusted place to explore your lineup."],
+  ["02", "Learn what lands", "See how people score flavor, heat, versatility, and repeat-purchase intent—feedback you can actually use."],
+  ["03", "Utilize new features", "Scorville is just getting started. Join the listserve to be among the first to try new features and programs as they roll out."],
 ];
 
 const tickerItems = ["DISCOVER", "RATE", "TRACK", "SHARE", "COMPETE"];
@@ -48,13 +50,17 @@ const tickerLoopItems = Array.from({ length: 4 }, (_, repeat) =>
 
 const focusRing = "focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-scorville-yellow";
 
+
 export default function Home() {
+  const expanded = true;
+  const wouldBuyAgain = true;
+  const buyAgainColor = wouldBuyAgain ? "var(--color-scorville-buy-again)" : "var(--color-scorville-pink)";
   const [audience, setAudience] = useState<Audience>("beta");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = useCallback(async (event: MouseEvent<HTMLButtonElement>) => {
+  const handleEarlyAccessSubmit = useCallback(async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setStatus("loading");
     setMessage("");
@@ -89,11 +95,11 @@ export default function Home() {
           className="order-3 flex w-full items-center justify-center gap-1 rounded-xl border border-scorville-border bg-scorville-surface p-1 min-[881px]:order-none min-[881px]:w-auto"
           aria-label="Jump to section"
         >
-          {["Overview", "Features", "About"].map((label) => (
+          {["Overview", "Features", "For Brands", "About"].map((label) => (
             <a
               key={label}
               className={`flex-1 rounded-lg px-[13px] py-2 text-center text-xs font-bold text-scorville-muted transition-colors hover:bg-scorville-surface-muted hover:text-scorville-text min-[881px]:flex-none ${focusRing}`}
-              href={label === "Overview" ? "#top" : `#${label.toLowerCase()}`}
+              href={label === "Overview" ? "#top" : label === "For Brands" ? "#brands" : `#${label.toLowerCase()}`}
             >
               {label}
             </a>
@@ -138,7 +144,7 @@ export default function Home() {
 
           <div
             className="absolute top-[51%] left-1/2 h-168.5 w-[calc(100%-36px)] -translate-x-1/2 -translate-y-1/2 -rotate-1 overflow-hidden rounded-[31px] border border-scorville-border bg-scorville-bg px-[13px] pt-[13px] pb-16 shadow-[0_30px_70px_rgba(0,0,0,.45),0_0_0_8px_rgba(255,243,237,.03)] min-[521px]:h-183.5 min-[521px]:w-[min(420px,78%)] min-[521px]:rounded-[38px] min-[521px]:px-[18px] min-[521px]:pt-4 min-[521px]:pb-18"
-            aria-hidden="true"
+            aria-label="Scorville collapsed and expanded review card previews"
           >
             <div className="flex justify-between px-1 pb-2.5 text-[8px] font-black text-[#8c7b80]">
               <span>4:20</span><span>● 5G</span>
@@ -149,51 +155,97 @@ export default function Home() {
                 <h2 className="mt-[7px] mb-[5px] font-display text-[29px] leading-[.94] font-black tracking-[-.045em] min-[521px]:text-[33px]">Get Saucey</h2>
                 <p className="m-0 text-[10px] font-bold text-scorville-muted min-[521px]:text-[11px]">Signed in as heatseeker</p>
               </div>
+              <img className="h-10 w-10 shrink-0 rounded-full border-2 border-scorville-pink object-cover shadow-[0_5px_16px_rgba(255,59,99,.22)] min-[521px]:h-11 min-[521px]:w-11" src="/images/me.jpg" alt="Profile picture for the signed-in user" />
             </div>
 
-            <div className="overflow-hidden rounded-[17px] border-2 border-scorville-pink bg-scorville-surface">
-              <div className="relative grid min-h-[148px] grid-cols-[88px_minmax(0,1fr)] gap-3 border-b border-scorville-border py-[13px] pr-14 pl-[13px] min-[521px]:min-h-[171px] min-[521px]:grid-cols-[108px_minmax(0,1fr)] min-[521px]:gap-4 min-[521px]:pt-[17px] min-[521px]:pr-17 min-[521px]:pb-4 min-[521px]:pl-[17px]">
-                <img className="h-[120px] w-full rounded-[13px] border border-[#7a3348] object-cover min-[521px]:h-[138px]" src="/images/checkin.png" alt="The last dab by heatonist featuring an 'XXX' on the bottle" />
-                <div className="min-w-0">
-                  <span className="block text-[9px] text-scorville-muted">@hurtssogood</span>
-                  <strong className="block text-lg">The Last Dab XXX</strong>
-                  <span className="block text-[9px] font-black tracking-[.12em] text-scorville-pink min-[521px]">TRADER JOE&apos;S</span>
-                  <span className="block text-[9px] text-scorville-muted">Overall: 9/10</span>
-                  <div className="flex text-scorville-orange">
-                    <MdiIcon path={mdiFire} className="h-4 w-4" />
-                    <MdiIcon path={mdiFire} className="h-4 w-4" />
-                    <MdiIcon path={mdiFire} className="h-4 w-4" />
-                    <MdiIcon path={mdiFire} className="h-4 w-4" />
-                    <MdiIcon path={mdiFire} className="h-4 w-4" />
+            <div className="grid gap-2.5">
+              <article className="overflow-hidden rounded-[15px] border-2 border-scorville-pink bg-scorville-surface shadow-[0_10px_24px_rgba(0,0,0,.2)]">
+                <div className={`grid grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2.5 p-2.5 min-[521px]:gap-3 min-[521px]:p-3 ${expanded ? "border-b border-scorville-border" : ""}`}>
+                  <img className="h-full min-h-[116px] w-full rounded-[11px] border border-[#7a3348] object-cover min-[521px]:min-h-[128px]" src="/images/checkin.png" alt="The Last Dab XXX hot sauce bottle" />
+
+                  <div className="min-w-0">
+                    <span className="block text-[8px] text-scorville-muted">@hurtssogood</span>
+                    <strong className="block font-display text-[14px] leading-[1.05] min-[521px]:text-base">The Last Dab XXX</strong>
+                    <span className="mt-0.5 block text-[7px] font-black tracking-[.08em] text-scorville-pink min-[521px]:text-[8px]">TRADER JOE&apos;S <span className="tracking-normal text-scorville-muted">· 7/31/2026</span></span>
+
+                    <div className="mt-1.5 grid grid-cols-[minmax(0,1fr)_78px] items-end gap-2 min-[521px]:grid-cols-[minmax(0,1fr)_88px]">
+                      <div className="min-w-0">
+                        <span className="block text-[6px] font-black tracking-[.08em] text-scorville-muted">OVERALL</span>
+                        <strong className="block text-xl leading-none min-[521px]:text-[23px]">8/10</strong>
+                        <div className="mt-1 flex text-scorville-orange" aria-label="Heat level 9 out of 10, very hot">
+                          {[0, 1, 2, 3, 4].map((flame) => <MdiIcon key={flame} path={mdiFire} className="h-3 w-3 min-[521px]:h-3.5 min-[521px]:w-3.5" />)}
+                        </div>
+                        <span className="block text-[7px] font-black text-scorville-orange">VERY HOT · 9/10</span>
+                        <span className="mt-1 block truncate text-[7px] font-bold text-scorville-muted">Reviewer avg 7.8/10</span>
+                      </div>
+                      <div
+                        className="rounded-[10px] border-2 bg-scorville-bg/70 px-1.5 py-2 text-center"
+                        style={{ borderColor: buyAgainColor, boxShadow: `0 4px 14px ${buyAgainColor}47` } as CSSProperties}
+                      >
+                        <span className="block text-[6px] leading-tight font-black text-scorville-text">WOULD BUY AGAIN</span>
+                        <strong className="mt-0.5 block text-[22px] leading-none" style={{ color: buyAgainColor }}>{wouldBuyAgain ? "YES" : "NO"}</strong>
+                      </div>
+                    </div>
                   </div>
-                  <p className="overflow-hidden text-ellipsis whitespace-nowrap text-[9px] font-bold text-scorville-muted">heat 9/10 · flavor 10/10</p>
-                  <span className="block text-[10px] text-scorville-muted">7/31/2026</span>
                 </div>
-                <span className="absolute top-[13px] right-2 rounded-[10px] bg-[#421d2a] px-2 py-[7px] text-[10px] font-black text-[#ff9db1] min-[521px]:right-3 min-[521px]:px-[11px] min-[521px]:py-2">Close</span>
-              </div>
+                <div>
+                  <blockquote className="border-b border-scorville-border px-3 py-2 font-display text-[11px] leading-[1.3] min-[521px]:text-xs">
+                    <span className="mr-1 text-scorville-pink">“</span>Smoky up front, then a slow-building heat with a bright citrus finish.<span className="text-scorville-pink">”</span>
+                  </blockquote>
 
-              <div className="grid grid-cols-3 gap-[7px] p-3 min-[521px]:gap-[9px] min-[521px]:p-4">
-                {scores.map(([label, value]) => (
-                  <div key={label} className="rounded-xl bg-scorville-surface-muted p-[9px] text-center min-[521px]:p-[11px]">
-                    <span className="block text-[8px] font-black text-scorville-muted">{label}</span>
-                    <strong className="mt-1 block text-base min-[521px]:text-md">{value}</strong>
+                  <div className="grid grid-cols-3 gap-1.5 p-2.5 min-[521px]:gap-2 min-[521px]:p-3">
+                    {detailScores.map(([label, value]) => (
+                      <div key={label} className="rounded-lg border border-scorville-border bg-scorville-surface-muted p-1.5 text-center min-[521px]:p-2">
+                        <span className="block text-[6px] font-black text-scorville-muted">{label}</span>
+                        <strong className="mt-0.5 block text-xs min-[521px]:text-sm">{value}</strong>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
 
-              <div className="px-3 pb-[11px] min-[521px]:px-4 min-[521px]:pb-3.5">
-                <strong className="mb-[9px] block text-[13px]">Pairings</strong>
-                <div className="flex gap-[7px]">
-                  {["fish tacos", "seafood", "burritos"].map((pairing) => (
-                    <span key={pairing} className="rounded-full border border-scorville-border px-2 py-[5px] text-[8px] font-black text-scorville-orange min-[521px]:px-[11px] min-[521px]:py-1.5 min-[521px]:text-[9px]">{pairing}</span>
-                  ))}
+                  <div className="px-2.5 pb-2.5 min-[521px]:px-3">
+                    <strong className="mb-1.5 block text-[9px]">Pairings</strong>
+                    <div className="flex gap-1.5">
+                      {["fish tacos", "seafood", "burritos"].map((pairing) => (
+                        <span key={pairing} className="rounded-full border border-scorville-border px-2 py-0.5 text-[7px] font-black text-scorville-orange">{pairing}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <nav className="grid grid-cols-2 gap-1.5 border-t border-scorville-border px-2.5 py-2 min-[521px]:px-3" aria-label="Review card actions">
+                    <a className={`rounded-lg bg-scorville-pink p-1.5 text-center text-[9px] font-black text-white transition-opacity hover:opacity-90 ${focusRing}`} href="#about">View Brand</a>
+                    <a className={`rounded-lg bg-scorville-orange p-1.5 text-center text-[9px] font-black text-white transition-opacity hover:opacity-90 ${focusRing}`} href="#features">View Sauce</a>
+                  </nav>
                 </div>
-              </div>
+              </article>
+              <article className="overflow-hidden rounded-[15px] border-2 border-scorville-pink bg-scorville-surface shadow-[0_10px_24px_rgba(0,0,0,.2)]">
+                <div className={`grid grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2.5 p-2.5 min-[521px]:gap-3 min-[521px]:p-3 ${expanded ? "border-b border-scorville-border" : ""}`}>
+                  <img className="h-full min-h-[116px] w-full rounded-[11px] border border-[#7a3348] object-cover min-[521px]:min-h-[128px]" src="/images/checkin.png" alt="The Last Dab XXX hot sauce bottle" />
 
-              <div className="grid gap-1.5 px-3 pb-3 min-[521px]:gap-2 min-[521px]:px-4 min-[521px]:pb-[17px]">
-                <span className="rounded-[11px] bg-scorville-pink p-[9px] text-center text-[13px] font-black text-white min-[521px]:p-[11px]">View Brand</span>
-                <span className="rounded-[11px] bg-scorville-orange p-[9px] text-center text-[13px] font-black text-white min-[521px]:p-[11px]">View Sauce</span>
-              </div>
+                  <div className="min-w-0">
+                    <span className="block text-[8px] text-scorville-muted">@heatseaker</span>
+                    <strong className="block font-display text-[14px] leading-[1.05] min-[521px]:text-base">Hell's Kitchen Habanero Hot Sauce</strong>
+                    <span className="mt-0.5 block text-[7px] font-black tracking-[.08em] text-scorville-pink min-[521px]:text-[8px]">Grandy Greenhouse & Farm Market<span className="tracking-normal text-scorville-muted">· 7/31/2026</span></span>
+
+                    <div className="mt-1.5 grid grid-cols-[minmax(0,1fr)_78px] items-end gap-2 min-[521px]:grid-cols-[minmax(0,1fr)_88px]">
+                      <div className="min-w-0">
+                        <span className="block text-[6px] font-black tracking-[.08em] text-scorville-muted">OVERALL</span>
+                        <strong className="block text-xl leading-none min-[521px]:text-[23px]">9/10</strong>
+                        <div className="mt-1 flex text-scorville-orange" aria-label="Heat level 7 out of 10, hot">
+                          {[0, 1, 2, 3, 4].map((flame) => <MdiIcon key={flame} path={mdiFire} className="h-3 w-3 min-[521px]:h-3.5 min-[521px]:w-3.5" />)}
+                        </div>
+                        <span className="block text-[7px] font-black text-scorville-orange">HOT · 6/10</span>
+                        <span className="mt-1 block truncate text-[7px] font-bold text-scorville-muted">Reviewer avg 8.2/10</span>
+                      </div>
+                      <div
+                        className="rounded-[10px] border-2 bg-scorville-bg/70 px-1.5 py-2 text-center"
+                        style={{ borderColor: buyAgainColor, boxShadow: `0 4px 14px ${buyAgainColor}47` } as CSSProperties}
+                      >
+                        <span className="block text-[6px] leading-tight font-black text-scorville-text">WOULD BUY AGAIN</span>
+                        <strong className="mt-0.5 block text-[22px] leading-none" style={{ color: buyAgainColor }}>{wouldBuyAgain ? "YES" : "NO"}</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
         </div>
@@ -232,6 +284,48 @@ export default function Home() {
       </section>
 
       <section
+        className="relative scroll-mt-33 overflow-hidden border-y border-scorville-border bg-scorville-surface px-[clamp(24px,6vw,88px)] py-24 min-[881px]:scroll-mt-25 min-[881px]:py-30"
+        id="brands"
+      >
+        <div className="pointer-events-none absolute -top-36 -right-28 h-96 w-96 rounded-full bg-scorville-pink/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-scorville-orange/8 blur-3xl" />
+
+        <div className="relative mx-auto max-w-360">
+          <div className="grid grid-cols-1 items-end gap-8 min-[881px]:grid-cols-[1.15fr_.85fr] min-[881px]:gap-16">
+            <div>
+              <p className="mb-6 flex items-center gap-2.5 text-xs font-black tracking-[.11em] text-scorville-pink uppercase">
+                <span className="h-0.5 w-6 bg-current" /> For sauce brands
+              </p>
+              <h2 className="font-display text-[clamp(52px,6vw,88px)] leading-[.94] font-black tracking-[-.045em]">
+                Put your sauces in front of people who <em className="not-italic text-scorville-pink">crave</em> the burn
+              </h2>
+            </div>
+            <div>
+              <p className="mb-6 text-base leading-[1.65] text-scorville-muted min-[521px]:text-lg">
+                Scorville helps independent makers turn real tasting experiences into discovery, useful feedback, and lasting customer relationships.
+              </p>
+              <a
+                className={`inline-flex items-center gap-7 rounded-xl bg-scorville-pink px-5 py-4 text-xs font-black tracking-[.08em] text-white uppercase shadow-[0_12px_30px_rgba(255,59,99,.22)] transition-transform hover:-translate-y-0.5 ${focusRing}`}
+                href="#waitlist"
+                onClick={() => setAudience("brand")}
+              >
+                Join as a brand <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-14 grid grid-cols-1 gap-4 min-[881px]:mt-18 min-[881px]:grid-cols-3">
+            {brandBenefits.map(([number, title, copy]) => (
+              <article key={number} className="rounded-2xl border border-scorville-border bg-scorville-bg/70 p-6 transition-[transform,border-color] hover:-translate-y-1 hover:border-scorville-pink min-[521px]:p-7">
+                <h3 className="mb-3 font-display text-[27px] leading-tight font-black">{title}</h3>
+                <p className="text-[15px] leading-[1.6] text-scorville-muted">{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
         className="grid scroll-mt-33 grid-cols-1 items-center gap-[clamp(50px,8vw,120px)] border-y border-scorville-border bg-scorville-surface px-[clamp(24px,6vw,88px)] py-27.5 min-[881px]:scroll-mt-25 min-[881px]:grid-cols-[minmax(300px,.78fr)_1.22fr]"
         id="about"
       >
@@ -257,21 +351,25 @@ export default function Home() {
         id="waitlist"
       >
         <div>
-          <p className="mb-6 flex items-center gap-2.5 text-xs font-black tracking-[.11em] text-scorville-pink uppercase"><span className="h-0.5 w-6 bg-current" /> Coming soon</p>
-          <h2 className="font-display text-[clamp(58px,7vw,96px)] leading-[.94] font-black tracking-[-.045em]">Ready to<br />bring the heat?</h2>
-          <p className="max-w-107.5 text-lg leading-[1.6] text-scorville-muted">Join the early list for first access, launch updates, and a chance to help shape Scorville.</p>
+          <p className="mb-6 flex items-center gap-2.5 text-xs font-black tracking-[.11em] text-scorville-pink uppercase"><span className="h-0.5 w-6 bg-current" /> Keep in touch</p>
+          <h2 className="font-display text-[clamp(58px,7vw,96px)] leading-[.94] font-black tracking-[-.045em]">
+            <>Ready to<br />bring the heat?</>
+          </h2>
         </div>
 
-        <div className="rounded-2xl border border-scorville-border bg-scorville-surface p-5.5 shadow-[0_24px_60px_rgba(0,0,0,.25)] min-[521px]:p-8" onSubmit={handleSubmit}>
-          <div className="m-0 mb-7 border-0 p-0">
-            <legend className="mb-[11px] block text-[10px] font-black tracking-[.12em] text-scorville-muted uppercase">I’m joining as a…</legend>
-            <div className="grid grid-cols-1 gap-2 min-[521px]:grid-cols-3">
+        <div className="rounded-2xl border border-scorville-border bg-scorville-surface p-5.5 shadow-[0_24px_60px_rgba(0,0,0,.25)] min-[521px]:p-8">
+          <div className="mb-7 rounded-xl border border-scorville-border bg-scorville-bg p-1" role="group" aria-label="Choose signup updates">
+            <div className="grid grid-cols-2 gap-1">
               {(Object.keys(audienceLabels) as Audience[]).map((option) => (
                 <button
                   type="button"
                   key={option}
-                  className={`cursor-pointer rounded-[10px] border px-2 py-3 text-xs font-bold transition-colors ${focusRing} ${audience === option ? "border-scorville-pink bg-[#3a1d28] text-[#ff8fa6]" : "border-scorville-border bg-scorville-bg text-scorville-muted"}`}
-                  onClick={() => setAudience(option)}
+                  className={`cursor-pointer rounded-lg px-3 py-3 text-xs font-black transition-colors ${focusRing} ${audience === option ? "bg-scorville-pink text-white shadow-[0_6px_18px_rgba(255,59,99,.2)]" : "text-scorville-muted hover:bg-scorville-surface-muted hover:text-scorville-text"}`}
+                  onClick={() => {
+                    setAudience(option);
+                    setStatus("idle");
+                    setMessage("");
+                  }}
                   aria-pressed={audience === option}
                 >
                   {audienceLabels[option]}
@@ -280,11 +378,17 @@ export default function Home() {
             </div>
           </div>
 
-          <label className="mb-[11px] block text-[10px] font-black tracking-[.12em] text-scorville-muted uppercase" htmlFor="email">Email address</label>
+          <p className="mb-5 text-sm leading-[1.55] text-scorville-muted">
+            {audience === "beta"
+              ? "Get invitations to our beta program, early feature previews, and first-launch alerts."
+              : "Get brand feature news, early program invitations, and partnership opportunities."}
+          </p>
+
+          <label className="mb-[11px] block text-[10px] font-black tracking-[.12em] text-scorville-muted uppercase" htmlFor="signup-email">Email address</label>
           <div className="block gap-2.5 min-[521px]:flex">
             <input
               className={`min-w-0 w-full flex-1 rounded-xl border border-scorville-border bg-scorville-bg p-[15px] text-scorville-text placeholder:text-scorville-muted ${focusRing}`}
-              id="email"
+              id="signup-email"
               name="email"
               type="email"
               placeholder="you@example.com"
@@ -296,17 +400,17 @@ export default function Home() {
             <button
               className={`mt-2.5 w-full cursor-pointer rounded-xl border-0 bg-scorville-pink px-5 py-[15px] font-black whitespace-nowrap text-white disabled:opacity-65 min-[521px]:mt-0 min-[521px]:w-auto ${focusRing}`}
               type="submit"
-              disabled={status === "loading"}
-              onClick={handleSubmit}
+              disabled={status === "loading" || !email}
+              onClick={handleEarlyAccessSubmit}
             >
-              {status === "loading" ? "Joining…" : "Join the List"} <span className="ml-3" aria-hidden="true">→</span>
+              {status === "loading" ? "Joining…" : "Join"} <span className="ml-3" aria-hidden="true">→</span>
             </button>
           </div>
           <p
             className={`mt-[11px] min-h-4 text-[11px] ${status === "success" ? "font-bold text-scorville-success" : status === "error" ? "font-bold text-[#ff8fa6]" : "text-scorville-muted"}`}
             role="status"
           >
-            {message || "No spam. Just the good, spicy stuff."}
+            {message || (audience === "beta" ? "Beta news and launch alerts only." : "Feature news and worthwhile opportunities only.")}
           </p>
         </div>
       </section>

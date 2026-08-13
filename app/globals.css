@@ -48,6 +48,7 @@
     --color-scorville-orange: #ff4d2f;
     --color-scorville-yellow: #ffd166;
     --color-scorville-success: #a7f3c4;
+    --color-scorville-buy-again: #43b9ad;
     --animate-ticker: ticker 22s linear infinite;
 
     @keyframes ticker {
