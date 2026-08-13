@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState, type CSSProperties, type MouseEvent, type SVGProps } from "react";
-import { mdiFire } from "@mdi/js";
+import { mdiCompass, mdiFire, mdiNewspaper, mdiAccountGroup, mdiTrophy } from "@mdi/js";
 
 type Audience = "beta" | "brand";
 
@@ -28,6 +28,7 @@ const detailScores = [
   ["FLAVOR", "10/10"],
   ["UNIQUENESS", "6/10"],
   ["VERSATILITY", "7/10"],
+  ["SHU", "2.693M"],
 ];
 
 const features = [
@@ -49,6 +50,26 @@ const tickerLoopItems = Array.from({ length: 4 }, (_, repeat) =>
 ).flat();
 
 const focusRing = "focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-scorville-yellow";
+
+function HeatFlames({ level }: { level: number }) {
+  return (
+    <div className="mt-1 flex" aria-label={`Heat level ${level} out of 10`}>
+      {[0, 1, 2, 3, 4].map((flame) => {
+        const pointsInFlame = Math.max(0, Math.min(2, level - flame * 2));
+        const isEarned = pointsInFlame > 0;
+
+        return (
+          <MdiIcon
+            key={flame}
+            path={mdiFire}
+            className={`h-3 w-3 min-[521px]:h-3.5 min-[521px]:w-3.5 ${isEarned ? "text-scorville-orange" : "text-scorville-muted"}`}
+            style={{ opacity: isEarned ? pointsInFlame / 2 : 0.28 }}
+          />
+        );
+      })}
+    </div>
+  );
+}
 
 
 export default function Home() {
@@ -166,17 +187,16 @@ export default function Home() {
                   <div className="min-w-0">
                     <span className="block text-[8px] text-scorville-muted">@hurtssogood</span>
                     <strong className="block font-display text-[14px] leading-[1.05] min-[521px]:text-base">The Last Dab XXX</strong>
-                    <span className="mt-0.5 block text-[7px] font-black tracking-[.08em] text-scorville-pink min-[521px]:text-[8px]">TRADER JOE&apos;S <span className="tracking-normal text-scorville-muted">· 7/31/2026</span></span>
+                    <span className="mt-0.5 block text-[7px] font-black tracking-[.08em] text-scorville-pink min-[521px]:text-[8px]">TRADER JOE&apos;S</span>
 
                     <div className="mt-1.5 grid grid-cols-[minmax(0,1fr)_78px] items-end gap-2 min-[521px]:grid-cols-[minmax(0,1fr)_88px]">
                       <div className="min-w-0">
                         <span className="block text-[6px] font-black tracking-[.08em] text-scorville-muted">OVERALL</span>
-                        <strong className="block text-xl leading-none min-[521px]:text-[23px]">8/10</strong>
-                        <div className="mt-1 flex text-scorville-orange" aria-label="Heat level 9 out of 10, very hot">
-                          {[0, 1, 2, 3, 4].map((flame) => <MdiIcon key={flame} path={mdiFire} className="h-3 w-3 min-[521px]:h-3.5 min-[521px]:w-3.5" />)}
-                        </div>
+                        <strong className="block text-xl leading-none min-[521px]:text-[23px]">10/10</strong>
+                        <HeatFlames level={9} />
                         <span className="block text-[7px] font-black text-scorville-orange">VERY HOT · 9/10</span>
                         <span className="mt-1 block truncate text-[7px] font-bold text-scorville-muted">Reviewer avg 7.8/10</span>
+                        <span className="text-scorville-muted text-[7px] min-[521px]:text-[8px]">7/31/2026</span>
                       </div>
                       <div
                         className="rounded-[10px] border-2 bg-scorville-bg/70 px-1.5 py-2 text-center"
@@ -193,7 +213,7 @@ export default function Home() {
                     <span className="mr-1 text-scorville-pink">“</span>Smoky up front, then a slow-building heat with a bright citrus finish.<span className="text-scorville-pink">”</span>
                   </blockquote>
 
-                  <div className="grid grid-cols-3 gap-1.5 p-2.5 min-[521px]:gap-2 min-[521px]:p-3">
+                  <div className="grid grid-cols-4 gap-1.5 p-2.5 min-[521px]:gap-2 min-[521px]:p-3">
                     {detailScores.map(([label, value]) => (
                       <div key={label} className="rounded-lg border border-scorville-border bg-scorville-surface-muted p-1.5 text-center min-[521px]:p-2">
                         <span className="block text-[6px] font-black text-scorville-muted">{label}</span>
@@ -218,22 +238,21 @@ export default function Home() {
               </article>
               <article className="overflow-hidden rounded-[15px] border-2 border-scorville-pink bg-scorville-surface shadow-[0_10px_24px_rgba(0,0,0,.2)]">
                 <div className={`grid grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2.5 p-2.5 min-[521px]:gap-3 min-[521px]:p-3 ${expanded ? "border-b border-scorville-border" : ""}`}>
-                  <img className="h-full min-h-[116px] w-full rounded-[11px] border border-[#7a3348] object-cover min-[521px]:min-h-[128px]" src="/images/checkin.png" alt="The Last Dab XXX hot sauce bottle" />
+                  <img className="h-full min-h-[116px] w-full rounded-[11px] border border-[#7a3348] object-cover min-[521px]:min-h-[128px]" src="/images/second_checkin.png" alt="Hell's Kitchen Habanero Hot Sauce" />
 
                   <div className="min-w-0">
                     <span className="block text-[8px] text-scorville-muted">@heatseaker</span>
-                    <strong className="block font-display text-[14px] leading-[1.05] min-[521px]:text-base">Hell's Kitchen Habanero Hot Sauce</strong>
-                    <span className="mt-0.5 block text-[7px] font-black tracking-[.08em] text-scorville-pink min-[521px]:text-[8px]">Grandy Greenhouse & Farm Market<span className="tracking-normal text-scorville-muted">· 7/31/2026</span></span>
+                    <strong className="block font-display text-[14px] leading-[1.05] min-[521px]:text-base">Hell&apos;s Kitchen Habanero Hot Sauce</strong>
+                    <span className="mt-0.5 block text-[7px] font-black tracking-[.08em] text-scorville-pink min-[521px]:text-[8px]">Grandy Greenhouse & Farm Market</span>
 
                     <div className="mt-1.5 grid grid-cols-[minmax(0,1fr)_78px] items-end gap-2 min-[521px]:grid-cols-[minmax(0,1fr)_88px]">
                       <div className="min-w-0">
                         <span className="block text-[6px] font-black tracking-[.08em] text-scorville-muted">OVERALL</span>
                         <strong className="block text-xl leading-none min-[521px]:text-[23px]">9/10</strong>
-                        <div className="mt-1 flex text-scorville-orange" aria-label="Heat level 7 out of 10, hot">
-                          {[0, 1, 2, 3, 4].map((flame) => <MdiIcon key={flame} path={mdiFire} className="h-3 w-3 min-[521px]:h-3.5 min-[521px]:w-3.5" />)}
-                        </div>
+                        <HeatFlames level={6} />
                         <span className="block text-[7px] font-black text-scorville-orange">HOT · 6/10</span>
                         <span className="mt-1 block truncate text-[7px] font-bold text-scorville-muted">Reviewer avg 8.2/10</span>
+                        <span className="text-scorville-muted text-[7px] min-[521px]:text-[8px]">7/31/2026</span>
                       </div>
                       <div
                         className="rounded-[10px] border-2 bg-scorville-bg/70 px-1.5 py-2 text-center"
@@ -247,6 +266,23 @@ export default function Home() {
                 </div>
               </article>
             </div>
+
+            <nav className="absolute right-0 bottom-0 left-0 grid grid-cols-5 items-center border-t border-scorville-border bg-scorville-surface/96 px-3 backdrop-blur-xl min-[521px]:h-17 min-[521px]:px-4" aria-label="App navigation">
+              {[
+                ["Discover", mdiCompass],
+                ["Feed", mdiNewspaper],
+                ["Check In", mdiFire],
+                ["Leaderboard", mdiTrophy],
+                ["Friends", mdiAccountGroup],
+              ].map(([label, path], index) => (
+                <span key={label} className={`flex flex-col items-center justify-center gap-0.5 text-[6px] font-bold ${index === 1 ? "text-scorville-pink" : index === 2 ? "text-white" : "text-scorville-muted"}`} aria-current={index === 1 ? "page" : undefined}>
+                  <span className={index === 2 ? "grid h-9 w-9 -translate-y-2 place-items-center rounded-full border-4 border-scorville-bg bg-scorville-pink shadow-[0_6px_18px_rgba(255,59,99,.35)] min-[521px]:h-10 min-[521px]:w-10" : "grid h-6 place-items-center"}>
+                    <MdiIcon path={path} className={index === 2 ? "h-5 w-5" : "h-4 w-4"} />
+                  </span>
+                  <span className={index === 2 ? "-mt-2" : ""}>{label}</span>
+                </span>
+              ))}
+            </nav>
           </div>
         </div>
       </section>
