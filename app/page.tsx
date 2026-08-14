@@ -32,9 +32,9 @@ const detailScores = [
 ];
 
 const features = [
-  ["01", "Discover", "Explore sauces by flavor, pepper, brand, heat level, or folks with similar taste."],
-  ["02", "Check In", "Rate every sauce you try and build a personal history of your heat journey."],
-  ["03", "Connect", "Follow fellow heat seekers and discover the independent brands behind the bottle."],
+  [1, "Discover", "Explore sauces by flavor, pepper, brand, heat level, or folks with similar taste."],
+  [2, "Check In", "Rate every sauce you try and build a personal history of your heat journey."],
+  [3, "Connect", "Follow fellow heat seekers and discover the independent brands behind the bottle."],
 ];
 
 const brandBenefits = [
@@ -146,7 +146,7 @@ export default function Home() {
             Find your<br />next <em className="not-italic text-scorville-pink">favorite</em><br />hot sauce.
           </h1>
           <p className="my-[30px] max-w-125 text-[19px] leading-[1.55] text-scorville-muted">
-            Track what you taste. Rate the burn. Discover sauces you’ll love—and compete against other pepper heads.
+            Track what you taste. Rate the burn. Discover sauces you’ll love—and compete against other pepper heads. <em className="text-scorville-pink"> Launching Fall 2026</em>.
           </p>
           <a
             className={`inline-flex items-center gap-8.5 rounded-xl bg-scorville-pink px-5 py-4 text-xs font-black tracking-[.08em] text-white uppercase shadow-[0_12px_30px_rgba(255,59,99,.25)] transition-transform hover:-translate-y-0.5 ${focusRing}`}
@@ -309,8 +309,8 @@ export default function Home() {
         <div className="grid grid-cols-1 gap-4 min-[881px]:grid-cols-3">
           {features.map(([number, title, copy]) => (
             <article key={number} className="min-h-62.5 rounded-2xl border border-scorville-border bg-scorville-surface p-6.5 transition-[transform,border-color] hover:-translate-y-1 hover:border-scorville-pink min-[881px]:min-h-90">
-              <div className="my-[18px] grid aspect-2/1 place-items-center rounded-xl border border-dashed border-[#7a3348] bg-[repeating-linear-gradient(135deg,#302128_0,#302128_12px,#25191f_12px,#25191f_24px)] text-[#ff8fa6]">
-                <span className="text-[9px] font-black tracking-[.12em]">YOUR IMAGE</span>
+              <div className="mb-2.5 flex h-60 w-full items-center justify-center overflow-hidden">
+                <img className="h-full w-full object-contain" src={`/images/shrew_${number}.png`} alt="" aria-hidden="true" />
               </div>
               <h3 className="mb-2.5 font-display text-[27px] font-black">{title}</h3>
               <p className="max-w-71.25 text-[15px] leading-[1.55] text-scorville-muted">{copy}</p>
@@ -365,10 +365,13 @@ export default function Home() {
         className="grid scroll-mt-33 grid-cols-1 items-center gap-[clamp(50px,8vw,120px)] border-y border-scorville-border bg-scorville-surface px-[clamp(24px,6vw,88px)] py-27.5 min-[881px]:scroll-mt-25 min-[881px]:grid-cols-[minmax(300px,.78fr)_1.22fr]"
         id="about"
       >
-        <div
-          className="flex min-h-85 flex-col items-center justify-center"
-        >
+        <div className="relative flex min-h-105 flex-col items-center justify-center px-4 min-[521px]:min-h-100">
           <img className="mt-2.5 h-[300px] w-[300px] rounded-full border border-scorville-pink object-cover" src="/images/me.jpg" alt="Photograph of the creator, Jenn" />
+          <aside className="absolute max-w-55 left-60 top-25 rounded-2xl border border-scorville-pink bg-scorville-bg/96 p-4 shadow-[0_18px_40px_rgba(0,0,0,.38),0_0_0_5px_rgba(255,59,99,.05)] backdrop-blur-xl min-[521px]:right-[3%] min-[881px]:-right-[8%]">
+            <p className="font-display text-[15px] leading-[1.35] text-scorville-text">
+              Pictured: me flying too close to the sun.
+            </p>
+          </aside>
         </div>
         <div>
           <p className="mb-6 flex items-center gap-2.5 text-xs font-black tracking-[.11em] text-scorville-pink uppercase">
