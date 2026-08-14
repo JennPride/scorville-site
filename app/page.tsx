@@ -81,6 +81,15 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  const handleBrandWaitlistClick = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    setAudience("brand");
+    setStatus("idle");
+    setMessage("");
+    window.history.replaceState(null, "", "#waitlist");
+    document.getElementById("waitlist")?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   const handleEarlyAccessSubmit = useCallback(async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setStatus("loading");
@@ -116,11 +125,11 @@ export default function Home() {
           className="order-3 flex w-full items-center justify-center gap-1 rounded-xl border border-scorville-border bg-scorville-surface p-1 min-[881px]:order-none min-[881px]:w-auto"
           aria-label="Jump to section"
         >
-          {["Overview", "Features", "For Brands", "About"].map((label) => (
+          {["Overview", "Features", "For Brands", "About Me"].map((label) => (
             <a
               key={label}
               className={`flex-1 rounded-lg px-[13px] py-2 text-center text-xs font-bold text-scorville-muted transition-colors hover:bg-scorville-surface-muted hover:text-scorville-text min-[881px]:flex-none ${focusRing}`}
-              href={label === "Overview" ? "#top" : label === "For Brands" ? "#brands" : `#${label.toLowerCase()}`}
+              href={label === "Overview" ? "#top" : `#${label.replace(" ", "-").toLowerCase()}`}
             >
               {label}
             </a>
@@ -231,8 +240,8 @@ export default function Home() {
                     </div>
                   </div>
                   <nav className="grid grid-cols-2 gap-1.5 border-t border-scorville-border px-2.5 py-2 min-[521px]:px-3" aria-label="Review card actions">
-                    <a className={`rounded-lg bg-scorville-pink p-1.5 text-center text-[9px] font-black text-white transition-opacity hover:opacity-90 ${focusRing}`} href="#about">View Brand</a>
-                    <a className={`rounded-lg bg-scorville-orange p-1.5 text-center text-[9px] font-black text-white transition-opacity hover:opacity-90 ${focusRing}`} href="#features">View Sauce</a>
+                    <a className={`rounded-lg bg-scorville-pink p-1.5 text-center text-[9px] font-black text-white transition-opacity hover:opacity-90 ${focusRing}`}>View Brand</a>
+                    <a className={`rounded-lg bg-scorville-orange p-1.5 text-center text-[9px] font-black text-white transition-opacity hover:opacity-90 ${focusRing}`}>View Sauce</a>
                   </nav>
                 </div>
               </article>
@@ -310,7 +319,12 @@ export default function Home() {
           {features.map(([number, title, copy]) => (
             <article key={number} className="min-h-62.5 rounded-2xl border border-scorville-border bg-scorville-surface p-6.5 transition-[transform,border-color] hover:-translate-y-1 hover:border-scorville-pink min-[881px]:min-h-90">
               <div className="mb-2.5 flex h-60 w-full items-center justify-center overflow-hidden">
-                <img className="h-full w-full object-contain" src={`/images/shrew_${number}.png`} alt="" aria-hidden="true" />
+                <img
+                  className="h-full w-full object-contain drop-shadow-[0_0_5px_rgba(255,59,99,.78)]"
+                  src={`/images/shrew_${number}.png`}
+                  alt=""
+                  aria-hidden="true"
+                />
               </div>
               <h3 className="mb-2.5 font-display text-[27px] font-black">{title}</h3>
               <p className="max-w-71.25 text-[15px] leading-[1.55] text-scorville-muted">{copy}</p>
@@ -321,7 +335,7 @@ export default function Home() {
 
       <section
         className="relative scroll-mt-33 overflow-hidden border-y border-scorville-border bg-scorville-surface px-[clamp(24px,6vw,88px)] py-24 min-[881px]:scroll-mt-25 min-[881px]:py-30"
-        id="brands"
+        id="for-brands"
       >
         <div className="pointer-events-none absolute -top-36 -right-28 h-96 w-96 rounded-full bg-scorville-pink/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-scorville-orange/8 blur-3xl" />
@@ -343,7 +357,7 @@ export default function Home() {
               <a
                 className={`inline-flex items-center gap-7 rounded-xl bg-scorville-pink px-5 py-4 text-xs font-black tracking-[.08em] text-white uppercase shadow-[0_12px_30px_rgba(255,59,99,.22)] transition-transform hover:-translate-y-0.5 ${focusRing}`}
                 href="#waitlist"
-                onClick={() => setAudience("brand")}
+                onClick={handleBrandWaitlistClick}
               >
                 Join as a brand <span aria-hidden="true">→</span>
               </a>
@@ -363,7 +377,7 @@ export default function Home() {
 
       <section
         className="grid scroll-mt-33 grid-cols-1 items-center gap-[clamp(50px,8vw,120px)] border-y border-scorville-border bg-scorville-surface px-[clamp(24px,6vw,88px)] py-27.5 min-[881px]:scroll-mt-25 min-[881px]:grid-cols-[minmax(300px,.78fr)_1.22fr]"
-        id="about"
+        id="about-me"
       >
         <div className="relative flex min-h-105 flex-col items-center justify-center px-4 min-[521px]:min-h-100">
           <img className="mt-2.5 h-[300px] w-[300px] rounded-full border border-scorville-pink object-cover" src="/images/me.jpg" alt="Photograph of the creator, Jenn" />

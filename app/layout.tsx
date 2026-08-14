@@ -4,6 +4,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Scorville — Find Your Next Favorite Hot Sauce",
   description: "Track what you taste, rate the burn, and discover hot sauces you'll love. Join the Scorville beta waitlist.",
+  icons: {
+    icon: "/images/logo_flame.png",
+    shortcut: "/images/logo_flame.png",
+  },
   openGraph: { title: "Scorville — Bring the Heat", description: "Discover, rate, and track your favorite hot sauces." },
   twitter: { card: "summary", title: "Scorville — Bring the Heat", description: "Discover, rate, and track your favorite hot sauces." },
 };
